@@ -25,7 +25,27 @@
 \subsection{Primzahlen}
 \subsubsection{Sieb des Eratosthenes}
 \lstinputlisting[language=Java]{eratosthenes.java}
-
+\section{Mathematisch Formeln und Gesetze}
+\subsection{Catalan}
+$C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$
+\subsection{kgV und ggT}
+$ggT(n,m)\cdot kgV(m,n)=|m\cdot n|$
+\subsection{Kreuzprodukt}
+$\vec{a}\times\vec{b}
+  =
+  \begin{pmatrix}a_1 \\ a_2 \\ a_3\end{pmatrix}
+  \times
+  \begin{pmatrix}b_1 \\ b_2 \\ b_3 \end{pmatrix}
+  =
+  \begin{pmatrix}
+    a_2b_3 - a_3b_2 \\
+    a_3b_1 - a_1b_3 \\
+    a_1b_2 - a_2b_1
+  \end{pmatrix}$
+\subsection{Orthogonale Projektion}
+$r_0:$ Ortsvektor; $u:$ Richtungsvektor; $n:$ Normalenvektor\\
+$P_g(\vec x) =  \vec r_0 + \frac{( \vec x - \vec r_0 ) \cdot \vec u}{\vec u \cdot \vec u} \, \vec u$\\
+$P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \vec n} \, \vec n$(nur 2D bzw. 3D auf Ebene)\\
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
 \lstinputlisting[language=Java]{fenwick.java}
@@ -43,4 +63,9 @@
 \section{Verschiedenes}
 \subsection{Potenzmenge}
 \lstinputlisting[language=java]{powerset.java}
+\subsection{LongestCommonSubsequence}
+\lstinputlisting[language=c++]{longestCommonSubseq.cpp}
+\subsection{LongestCommonSubstring}
+\subsection{Permutation \& Sequenzen}
+\lstinputlisting[language=java]{PermsAndSequ.java}
 \end{document}
