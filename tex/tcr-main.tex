@@ -25,9 +25,14 @@
 \subsection{Primzahlen}
 \subsubsection{Sieb des Eratosthenes}
 \lstinputlisting[language=Java]{eratosthenes.java}
+\subsubsection{Primzahlentest}
+\lstinputlisting[language=Java]{isprim.java}
+\subsection{Binomial Koeffizient}
+\lstinputlisting[language=Java]{binomial.java}
 \section{Mathematisch Formeln und Gesetze}
 \subsection{Catalan}
-$C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$
+$C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$\\
+$C_{n+1} = \frac{4n+2}{n+2}C_n=\sum_{k=0}^{n}C_kC_{n-k}$
 \subsection{kgV und ggT}
 $ggT(n,m)\cdot kgV(m,n)=|m\cdot n|$
 \subsection{Kreuzprodukt}
@@ -46,12 +51,8 @@ $\vec{a}\times\vec{b}
 $r_0:$ Ortsvektor; $u:$ Richtungsvektor; $n:$ Normalenvektor\\
 $P_g(\vec x) =  \vec r_0 + \frac{( \vec x - \vec r_0 ) \cdot \vec u}{\vec u \cdot \vec u} \, \vec u$\\
 $P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \vec n} \, \vec n$(nur 2D bzw. 3D auf Ebene)\\
-\subsubsection{Primzahlentest}
-\lstinputlisting[language=Java]{isprim.java}
-\subsection{Binomial Koeffizient}
-\lstinputlisting[language=Java]{binomial.java}
-
-
+\subsection{Dreicksfläche}
+$F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
 \lstinputlisting[language=Java]{fenwick.java}
