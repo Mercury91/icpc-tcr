@@ -1,17 +1,30 @@
-\documentclass[10pt,a4paper,ngerman]{article}
+\documentclass[10pt,a4paper,ngerman,oneside,twocolumn]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+
+\setlength{\columnseprule}{0.25pt}
+\linespread{1.185}
+\usepackage{fancyhdr}
+\usepackage[landscape,left=.5cm,right=.5cm,top=2.1cm,bottom=.5cm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE,RO]{ACM ICPC Reference, page \bfseries\thepage}
+\fancyhead[LE,LO]{Universität zu Lübeck}
+
 \usepackage[safe,warn]{textcomp}
 \usepackage{tgtermes}
 \usepackage[scaled]{berasans}
-\renewcommand*\ttdefault{txtt}
-
 \usepackage{babel}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+
+
+\renewcommand*\ttdefault{txtt}
+
+
 
 \usepackage{listings}
 
@@ -20,6 +33,7 @@
 \begin{document}
 \lstset{basicstyle=\ttfamily\footnotesize,numbers=left,numberstyle=\tiny,tabsize=2,numbersep=5pt}
 \maketitle
+\thispagestyle{fancy}
 
 \section{Mathematische Algorithmen}
 \subsection{Primzahlen}
@@ -51,8 +65,22 @@ $\vec{a}\times\vec{b}
 $r_0:$ Ortsvektor; $u:$ Richtungsvektor; $n:$ Normalenvektor\\
 $P_g(\vec x) =  \vec r_0 + \frac{( \vec x - \vec r_0 ) \cdot \vec u}{\vec u \cdot \vec u} \, \vec u$\\
 $P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \vec n} \, \vec n$(nur 2D bzw. 3D auf Ebene)\\
+\subsection{Geradenschnittpunkt}
+$g_1: ax+by=c;\,g_2: px+qx=r;\;\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
+x = cq-br\\y=ar-cp
+\end{pmatrix}$\\
+$
+g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end{pmatrix}\;
+g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\; w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
+\Rightarrow D=(s_xt_y-t_xs_y)\, D_s=(t_xw_y-t_yw_x)\,D_t=(s_yw_x-s_xw_y)\; s=D_s/D, t=D_t/D$
 \subsection{Dreicksfläche}
 $F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
+\subsection{Kombinatorik}
+\begin{tabular}{|c||c|c|}\hline
+ & mit ZL & ohne ZL\\\hline\hline
+Variationen & $n^k$ & $\frac{n!}{(n-k)!}$\\\hline
+Kombinationen & $\binom{n}{k}=\binom{n}{n-k}=\frac{n!}{k!(n-k)!}$ & $\binom{n+k-1}{k}=\binom{n+k-1}{n-1}$\\\hline
+\end{tabular}
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
 \lstinputlisting[language=Java]{fenwick.java}
@@ -75,6 +103,8 @@ $F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
 \lstinputlisting[language=c++]{longestCommonSubseq.cpp}
 \subsection{LongestCommonSubstring}
 \lstinputlisting[language=java,firstline=27,firstnumber=1,lastline=66]{LongestSubstring.java}
+\subsection{LongestIncreasingSubsequence}
+\lstinputlisting[language=c++]{longestIncreasingSubsequence.cpp}
 \subsection{Permutation \& Sequenzen}
 \lstinputlisting[language=java]{PermsAndSequ.java}
 \end{document}
