@@ -27,6 +27,7 @@
 
 
 \usepackage{listings}
+%\usepackage{multicol} 
 
 \title{Team Contest Reference}
 \author{Universität zu Lübeck}
@@ -119,4 +120,77 @@ Verwendung zu Berechnung des inversen Elements $b$ zu $a$ bezüglich einer Restk
 \lstinputlisting[language=c++]{longestIncreasingSubsequence.cpp}
 \subsection{Permutation \& Sequenzen}
 \lstinputlisting[language=java]{PermsAndSequ.java}
+\section{Formatierung \& Sonstiges}
+\subsection{Ausgabeformatierung mit JAVA - \texttt{DecimalFormat}}
+\begin{tabular}{cl}
+Symbol & Bedeutung\\\hline
+0 &	(Ziffer) – unbelegt wird eine Null angezeigt. (0.234=(00.00)=>00.23)\\
+\# &	(Ziffer) – unbelegt bleibt leer, (keine unnötigen nullen).\\
+. &	Dezimaltrenner. \\
+, &	Gruppiert die Ziffern (eine Gruppe ist so groß wie der Abstand von "," zu ".").\\
+; &	Trennzeichen. Links Muster für pos., rechts für neg. Zahlen\\
+- &	Das Standardzeichen für Negativpräfix\\
+\% &	Prozentwert.\\
+\%\% &	Promille.\\
+X &	Alle anderen Zeichen X können ganz normal benutzt werden.\\
+' &	Ausmarkieren von speziellen Symbolen im Präfix oder Suffix \\
+\end{tabular}
+\subsection{Ausgabeformatierung mit \texttt{printf}}
+%\begin{multicols}{2}
+\begin{verbatim}
+%d %i	Decimal signed integer.
+%o	Octal int.
+%x %X	Hex int.
+%u	Unsigned int.
+%c	Character.
+%s	String.	siehe unten.
+%f	double
+%e %E	double.
+%g %G	double.
+
+-      linksbündig.
+0  	  Felder mit 0 ausfüllen 
+      (an Stelle von Leerzeichen).
+\end{verbatim}
+%\columnbreak
+\begin{verbatim}
+
++	  Vorzeichen immer ausgeben.
+blank  pos. Zahlen mit Leerzeichen beg.
+# 	  verschiedene Bedeutung:
+ %#o (Oktal) 0 Präfix wird eingefügt.
+ %#x (Hex)   0x Präfix bei !=0
+ %#X (Hex)   0X Präfix bei !=0
+ %#e  Dezimalpunkt immer anzeigen.
+ %#E  Dezimalpunkt immer anzeigen.
+ %#f  Dezimalpunkt immer anzeigen.
+ %#g  
+ %#G  Dezimalpunkt immer anzeigen. 
+      Nullen nach Dzmpkt. bleiben
+\end{verbatim}
+%\end{multicols}
+\begin{verbatim}
+int i = 123;
+printf( "|%d|   |%d|\n" ,     i, -i);    // |123|   |-123|
+printf( "|%5d| |%5d|\n" ,     i, -i);    // |  123| | –123|
+printf( "|%-5d| |%-5d|\n" ,   i, -i);    // |123  | |-123 |
+printf( "|%+-5d| |%+-5d|\n" , i, -i);    // |+123 | |-123 |
+printf( "|%05d| |%05d|\n\n",  i, -i);    // |00123| |-0123|
+printf( "|%X| |%x|\n", 0xabc, 0xabc );   // |ABC| |abc|
+printf( "|%08x| |%#x|\n\n", 0xabc, 0xabc ); // |00000abc| |0xabc|
+double d = 1234.5678;
+printf( "|%f| |%f|\n" ,         d, -d);  // |1234,567800| |-1234,567800|
+printf( "|%.2f| |%.2f|\n" ,     d, -d);  // |1234,57| |-1234,57|
+printf( "|%10f| |%10f|\n" ,     d, -d);  // |1234,567800| |-1234,567800|
+printf( "|%10.2f| |%10.2f|\n" , d, -d);  // |   1234,57| |  –1234,57|
+printf( "|%010.2f| |%010.2f|\n",d, -d);  // |0001234,57| |-001234,57|
+String s = "Monsterbacke";
+printf( "\n|%s|\n", s );                 // |Monsterbacke|
+printf( "|%20s|\n", s );                 // |        Monsterbacke|
+printf( "|%-20s|\n", s );                // |Monsterbacke        |
+printf( "|%7s|\n", s );                  // |Monsterbacke|
+printf( "|%.7s|\n", s );                 // |Monster|
+printf( "|%20.7s|\n", s );               // |             Monster|
+\end{verbatim}
+
 \end{document}
