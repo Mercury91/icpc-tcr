@@ -37,12 +37,15 @@
 
 \section{Mathematische Algorithmen}
 \subsection{Primzahlen}
+Für Primzahlen gilt immer (aber nicht nur für Primzahlen)
+\[a^p\equiv a\mod p \quad\text{ bzw. }\quad a^{p-1}\equiv 1 \mod p.\]
 \subsubsection{Sieb des Eratosthenes}
 \lstinputlisting[language=Java]{eratosthenes.java}
 \subsubsection{Primzahlentest}
 \lstinputlisting[language=Java]{isprim.java}
 \subsection{Binomial Koeffizient}
 \lstinputlisting[language=Java]{binomial.java}
+
 \section{Mathematisch Formeln und Gesetze}
 \subsection{Catalan}
 $C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$\\
@@ -81,6 +84,15 @@ $F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
 Variationen & $n^k$ & $\frac{n!}{(n-k)!}$\\\hline
 Kombinationen & $\binom{n}{k}=\binom{n}{n-k}=\frac{n!}{k!(n-k)!}$ & $\binom{n+k-1}{k}=\binom{n+k-1}{n-1}$\\\hline
 \end{tabular}
+
+\subsection{Modulare Arithmetik}
+Bedeutung der größten gemeinsamen Teiler:
+\[ d = \text{ggT}(a,b) = as+bt \]
+Verwendung zu Berechnung des inversen Elements $b$ zu $a$ bezüglich einer Restklassengruppe $n$ ($a$ und $n$ müssen teilerfremd sein):
+\[ ab\equiv 1 \mod n\quad\Leftrightarrow\quad s\equiv b \mod n\quad\text{ für }1=\text{ggT}(a,n)\]
+\subsubsection{Erweiterter Euklidischer Algorithmus}
+\lstinputlisting[language=Java]{eea.java}
+
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
 \lstinputlisting[language=Java]{fenwick.java}
