@@ -277,5 +277,33 @@ printf( "|%7s|\n", s );                  // |Monsterbacke|
 printf( "|%.7s|\n", s );                 // |Monster|
 printf( "|%20.7s|\n", s );               // |             Monster|
 \end{verbatim}
+\subsection{C++ Eingabe ohne bekannt Länge}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+#include <sstream>
+#include <istream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+
+using namespace std;
+int main(){
+	string s;
+	do{
+		getline(cin,s);
+		istringstream* ss;
+		ss = new istringstream( s );
+		while (!ss->eof())
+		{
+			string xs;
+			getline( *ss, xs, ' ' );  // try to read the next field into it
+  
+			int x = atoi(xs.c_str());
+			cout<<" "<<xs;
+		}
+		cout<<endl;	    
+	} while(!cin.eof());
+}
+\end{lstlisting}
 
 \end{document}
