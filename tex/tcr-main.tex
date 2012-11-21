@@ -26,7 +26,8 @@
 
 
 \renewcommand*\ttdefault{txtt}
-
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\ggT}{\ensuremath{\operatorname{ggT}}}
 
 
 \usepackage{listings}
@@ -49,7 +50,10 @@ Für Primzahlen gilt immer (aber nicht nur für Primzahlen)
 \lstinputlisting[language=Java]{isprim.java}
 \subsection{Binomial Koeffizient}
 \lstinputlisting[language=Java]{binomial.java}
-
+\subsection{Eulersche $\varphi$-Funktion}
+$\varphi(n\in\N):=|\{a\in\N |1\leq a \leq n \wedge \ggT (a,n)=1\}|$\\
+$\varphi(n\cdot m)=\varphi(n)\cdot\varphi(m)$
+\lstinputlisting[language=C++]{phi.cpp}
 \section{Mathematisch Formeln und Gesetze}
 \subsection{Catalan}
 $C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$\\
