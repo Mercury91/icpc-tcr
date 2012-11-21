@@ -110,7 +110,85 @@ Verwendung zu Berechnung des inversen Elements $b$ zu $a$ bezüglich einer Restk
 \lstinputlisting[language=Java]{toposort.java}
 \subsection{Prim (Minimum Spanning Tree)}
 \lstinputlisting[language=c]{prim.c}
+\subsection{Dijkstra}
+		
+			\begin{itemize}
+				\item alle kürzesten Wege von einem Knoten aus in $\mathcal{O}(\#Kanten+\#Knoten)$
+				\item negative Kanten: 
+				\begin{itemize}
+					\item auf alle Kantengewichte $|min|+1$ (damit 0 nicht entsteht)
+					\item Kantenanzahl zum Ziel mitspeichern
+					\begin{equation*}
+						\frac{Wegl"ange}{Kantenanzahl \cdot (|min|+1)}
+					\end{equation*}
+				\end{itemize}
+			\end{itemize}
+				\lstset{language=c}
+				\begin{lstlisting}
+// look for shortest distance from a to b in adjacency matrix
+// visited nodes for breadth first search
+bool nodeVisited[26];
+for (int k=0; k<26; k++) {
+        nodeVisited[k]=false;
+}
+queue<int> searchQueue;
+queue<string> outputQueue;
+searchQueue.push(aNumber); // start search from a
+string start="";
+start += a[0];
+outputQueue.push(start);
+string outputString;
+while (searchQueue.empty()==false && nodeVisited[bNumber]==false) {
+        int node=searchQueue.front();
+        searchQueue.pop();
+        string nodeString=outputQueue.front();
+        outputQueue.pop();
+        for (int k=0; k<26; k++) {
+                if (cities[node][k]==true && nodeVisited[k]==false) {
+                        searchQueue.push(k);
+                        nodeVisited[k]=true;
+                        char addToOutput=k+'A';
+                        string s=nodeString;
+                        s += addToOutput;
+                        outputQueue.push(s);
+                        if (k==bNumber) {
+                                outputString=s;
+                        }
+                }
+        }
+}
+cout << outputString << "\n";	
+\end{lstlisting}
 
+\subsection{Belman-Ford}
+\begin{lstlisting}[language=pascal]
+procedure BellmanFord(list vertices, list edges, vertex source)
+   // This implementation takes in a graph, represented as lists of vertices
+   // and edges, and modifies the vertices so that their distance and
+   // predecessor attributes store the shortest paths.
+
+   // Step 1: initialize graph
+   for each vertex v in vertices:
+       if v is source tn v.distance := 0
+       else v.distance := infinity
+       v.predecessor := null
+
+   // Step 2: relax edges repeatedly
+   for i from 1 to size(vertices)-1:
+       for each edge uv in edges: // uv is the edge from u to v
+           u := uv.source
+           v := uv.destination
+           if u.distance + uv.weight < v.distance:
+               v.distance := u.distance + uv.weight
+               v.predecessor := u
+
+   // Step 3: check for negative-weight cycles
+   for each edge uv in edges:
+       u := uv.source
+       v := uv.destination
+       if u.distance + uv.weight < v.distance:
+           error "Graph contains a negative-weight cycle"
+\end{lstlisting}
 \section{Geometrische Algorithmen}
 \subsection{Graham Scan (Convex Hull)}
 \lstinputlisting[language=java]{graham.java}
