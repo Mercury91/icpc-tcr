@@ -104,20 +104,22 @@ g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end
 g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\; w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
 \Rightarrow D=(s_xt_y-t_xs_y)\, D_s=(t_xw_y-t_yw_x)\,D_t=(s_yw_x-s_xw_y)\; s=D_s/D, t=D_t/D$
 \subsection{Trigonometrie}
-$\sin ( x \pm y ) = \sin x \; \cos y \pm \sin y \; \cos x </math><ref name="forster anal1"> Otto Forster ''Analysis 1 Differential- und Integralrechnung einer Veränderlichen'' vieweg 1983 Seite 87</ref>
-\cos ( x \pm y ) = \cos x \; \cos y \mp \sin x \; \sin y </math><ref name="forster anal1" />
-
-\tan ( x + y ) = \frac{ \tan x + \tan y }{ 1 - \tan x \; \tan y } = \frac{ \sin (x + y) }{ \cos (x + y) }</math>
-\tan ( x - y ) = \frac{ \tan x - \tan y }{ 1 + \tan x \; \tan y } = \frac{ \sin (x - y) }{ \cos (x - y) }</math>
-
-\cot \left( x+y\right) =\frac{\cot x\cot y-1}{\cot x+\cot y} = \frac{ \cos (x + y) }{ \sin (x + y) }</math>
-
-\cot \left( x-y\right) =\frac{\cot x\cot y+1}{\cot y -\cot x} = \frac{ \cos (x - y) }{ \sin (x - y) }</math>
-
-''x'' = ''y'' \\
-y = \frac{\pi}{2}\\
-\sin ( x + y ) \cdot \sin ( x - y ) = \cos^2 y - \cos^2 x  = \sin^2 x - \sin^2 y \\
-\cos ( x + y ) \cdot \cos ( x - y ) = \cos^2 y - \sin^2 x  = \cos^2 y + \cos^2 x - 1= 1-\sin^2 x - \sin ^2 y$
+\renewcommand{\tan}{\ensuremath{\operatorname{tan}}}
+\renewcommand{\cot}{\ensuremath{\operatorname{cot}}}
+\subsubsection{Additionstheoreme}
+$\sin ( x \pm y ) = \sin x \; \cos y \pm \sin y \; \cos x $\\
+$\cos ( x \pm y ) = \cos x \; \cos y \mp \sin x \; \sin y $\\
+$\tan ( x + y ) = \frac{ \tan x + \tan y }{ 1 - \tan x \; \tan y } = \frac{ \sin (x + y) }{ \cos (x + y) }\\
+\tan ( x - y ) = \frac{ \tan x - \tan y }{ 1 + \tan x \; \tan y } = \frac{ \sin (x - y) }{ \cos (x - y) }\\
+\cot \left( x+y\right) =\frac{\cot x\cot y-1}{\cot x+\cot y} = \frac{ \cos (x + y) }{ \sin (x + y) }$\\
+$\cot \left( x-y\right) =\frac{\cot x\cot y+1}{\cot y -\cot x} = \frac{ \cos (x - y) }{\sin (x - y)}$\\
+$\sin ( x + y ) \cdot \sin ( x - y ) = \cos^2 y - \cos^2 x  = \sin^2 x - \sin^2 y $\\
+$\cos ( x + y ) \cdot \cos ( x - y ) = \cos^2 y - \sin^2 x  = \cos^2 y + \cos^2 x - 1= 1-\sin^2 x - \sin ^2 y
+$\\
+\subsubsection{Kosinussatz}
+$c^2=a^2+b^2-2\,a\,b\,\cos\gamma$ 
+\subsection{Zusammenhang Kreuzprodukt \& Sinus}
+$|\vec{a}\times\vec{b}|=|\vec{a}| \, | \vec{b} | \, \sin \measuredangle (\vec{a},\vec{b})$
 \subsection{Dreicksfläche}
 $F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
 \subsection{Kombinatorik}
