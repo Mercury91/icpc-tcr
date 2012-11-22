@@ -60,6 +60,19 @@ $C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$\\
 $C_{n+1} = \frac{4n+2}{n+2}C_n=\sum_{k=0}^{n}C_kC_{n-k}$
 \subsection{kgV und ggT}
 $ggT(n,m)\cdot kgV(m,n)=|m\cdot n|$
+\subsection{modulare Exponentiation}
+$b^e \equiv c (\mod) m$\\
+$b^e = b^{\left( \sum_{i=0}^{n-1} a_i 2^i \right)} = \prod_{i=0}^{n-1} \left( b^{2^i} \right) ^ {a_i}$
+\begin{lstlisting}[language=pascal]
+function modular_pow(base, exponent, modulus)
+    result := 1
+    while exponent > 0
+        if (exponent mod 2 == 1):
+           result := (result * base) mod modulus
+        exponent := exponent >> 1
+        base = (base * base) mod modulus
+    return result
+\end{lstlisting}
 \subsection{Kreuzprodukt}
 $\vec{a}\times\vec{b}
   =
@@ -110,6 +123,58 @@ Verwendung zu Berechnung des inversen Elements $b$ zu $a$ bezüglich einer Restk
 \lstinputlisting[language=Java]{toposort.java}
 \subsection{Prim (Minimum Spanning Tree)}
 \lstinputlisting[language=c]{prim.c}
+\subsection{Kruskal}
+\begin{lstlisting}[language=java]
+public static LinkedList<Edge> kruskal(LinkedList<Edge> adjList, int root, int nodeCount) {
+	LinkedList<SortedSet<Integer>> branches = new LinkedList<SortedSet<Integer>>();
+	for (int i = 0; i < nodeCount; i++) {
+		branches.add(new TreeSet<Integer>());
+		branches.get(branches.size() - 1).add(i);
+	}
+
+	PriorityQueue<Edge> edges = new PriorityQueue<Edge>(1, new Comparator<Edge>() {
+		@Override
+		public int compare(Edge e1, Edge e2) {
+			if (e1.weight <= e2.weight) {
+				return -1;
+			} else {
+				return 1;
+			}
+		}
+	});
+	edges.addAll(adjList);
+	LinkedList<Edge> result = new LinkedList<Edge>();
+
+	while (branches.size() > 1) {
+		Edge min = edges.remove();
+
+		SortedSet<Integer> from = null;
+		for (SortedSet<Integer> branchFrom : branches) {
+			if (branchFrom.contains(min.from)) {
+				if (!branchFrom.contains(min.to)) {
+					from = branchFrom;
+					break;
+				}
+			}
+		}
+
+		if (from != null) {
+			for (SortedSet<Integer> branchTo : branches) {
+				if (!(from.equals(branchTo))) {
+					if (branchTo.contains(min.to)) {
+						from.addAll(branchTo);
+						branches.remove(branchTo);
+						result.add(min);
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	return result;
+}		
+\end{lstlisting}
 \subsection{Dijkstra}
 		
 			\begin{itemize}
