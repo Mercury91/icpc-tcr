@@ -6,10 +6,10 @@
 \usepackage[T1]{fontenc}
 
 \setlength{\columnseprule}{0.25pt}
-\linespread{1.185}
+\linespread{1.180}
 \usepackage{fancyhdr}
 %\usepackage[landscape,left=.5cm,right=.5cm,top=2.1cm,bottom=.5cm]{geometry}
-\usepackage[left=.5cm,right=.5cm,top=2.1cm,bottom=.5cm]{geometry}
+\usepackage[left=1cm,right=.75cm,top=2.1cm,bottom=.5cm]{geometry}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[RE,RO]{ACM ICPC Reference, page \bfseries\thepage}
@@ -19,10 +19,11 @@
 \usepackage{tgtermes}
 \usepackage[scaled]{berasans}
 \usepackage{babel}
-
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 
 \renewcommand*\ttdefault{txtt}
@@ -31,7 +32,8 @@
 
 
 \usepackage{listings}
-%\usepackage{multicol} 
+\lstset{frame=left}
+\usepackage{multicol} 
 
 \title{Team Contest Reference}
 \author{Universität zu Lübeck}
@@ -39,6 +41,10 @@
 \lstset{basicstyle=\ttfamily\footnotesize,numbers=left,numberstyle=\tiny,tabsize=2,numbersep=5pt}
 \maketitle
 \thispagestyle{fancy}
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\newpage
 
 \section{Mathematische Algorithmen}
 \subsection{Primzahlen}
@@ -97,6 +103,21 @@ $
 g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end{pmatrix}\;
 g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\; w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
 \Rightarrow D=(s_xt_y-t_xs_y)\, D_s=(t_xw_y-t_yw_x)\,D_t=(s_yw_x-s_xw_y)\; s=D_s/D, t=D_t/D$
+\subsection{Trigonometrie}
+$\sin ( x \pm y ) = \sin x \; \cos y \pm \sin y \; \cos x </math><ref name="forster anal1"> Otto Forster ''Analysis 1 Differential- und Integralrechnung einer Veränderlichen'' vieweg 1983 Seite 87</ref>
+\cos ( x \pm y ) = \cos x \; \cos y \mp \sin x \; \sin y </math><ref name="forster anal1" />
+
+\tan ( x + y ) = \frac{ \tan x + \tan y }{ 1 - \tan x \; \tan y } = \frac{ \sin (x + y) }{ \cos (x + y) }</math>
+\tan ( x - y ) = \frac{ \tan x - \tan y }{ 1 + \tan x \; \tan y } = \frac{ \sin (x - y) }{ \cos (x - y) }</math>
+
+\cot \left( x+y\right) =\frac{\cot x\cot y-1}{\cot x+\cot y} = \frac{ \cos (x + y) }{ \sin (x + y) }</math>
+
+\cot \left( x-y\right) =\frac{\cot x\cot y+1}{\cot y -\cot x} = \frac{ \cos (x - y) }{ \sin (x - y) }</math>
+
+''x'' = ''y'' \\
+y = \frac{\pi}{2}\\
+\sin ( x + y ) \cdot \sin ( x - y ) = \cos^2 y - \cos^2 x  = \sin^2 x - \sin^2 y \\
+\cos ( x + y ) \cdot \cos ( x - y ) = \cos^2 y - \sin^2 x  = \cos^2 y + \cos^2 x - 1= 1-\sin^2 x - \sin ^2 y$
 \subsection{Dreicksfläche}
 $F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
 \subsection{Kombinatorik}
@@ -299,6 +320,60 @@ procedure BellmanFord(list vertices, list edges, vertex source)
 \section{Geometrische Algorithmen}
 \subsection{Graham Scan (Convex Hull)}
 \lstinputlisting[language=java]{graham.java}
+\subsection{Line Intersection}
+	\begin{itemize}
+		\item \textbf{Mehr als 2 Linien:}
+		\item findet nicht alle Intersection Points, aber immer wenn einer existiert, dann angegeben
+		\item $O(n\log n + l \log n)$
+		\begin{algorithm}
+			\begin{algorithmic}[1]
+			\STATE initialize the structure Q (sorted by y-coordinates) for the event points and T for the adjacency of line segments.
+			\STATE insert all end points of lines into Q (they will get sorted). Upper end points are stored with their line segment.
+			\WHILE{event point in Q}
+				\STATE find all line segments in T that contain p
+				\STATE if this are more than one, store p as intersection point
+				\STATE sort the line segments in T so that they are in the order that exists directly below p
+				\STATE check the both outer line segments that passed p for intersection with their neighbours which have nnot passed p
+				\STATE if there us ab intersection, store it as an event point in Q
+				\STATE remove p from Q
+			\ENDWHILE
+			\end{algorithmic}
+		\end{algorithm}
+		\item \textbf{2 Linien:}
+		\item line intersection (test if possible!)
+		\item Achtung: beide Reihenfolgen testen:
+		    if ((checkLines(readLines[j],newLine) == true) $\&\&$ (checkLines(newLine,readLines[j]) == true))
+	\end{itemize}
+		\lstset{language=c}
+			\begin{lstlisting}
+struct line {
+   int x0;
+   int y0;
+   int x1;
+   int y1;
+};
+
+// prueft, ob sich die Linien schneiden koennen
+bool checkLines(line a, line b) {
+   // Vektor Linie a
+   int x0 = a.x1 - a.x0;
+   int y0 = a.y1 - a.y0;
+   // Vektor zu Startpunkt b
+   int x1 = b.x0 - a.x0;
+   int y1 = b.y0 - a.y0;
+   // Vektor zu Endpunkt b
+   int x2 = b.x1 - a.x0;
+   int y2 = b.y1 - a.y0;
+   // Kreuzprodukte berechnen
+   int crossProduct1 = x0 * y1 + x1 * y0;
+   int crossProduct2 = x0 * y2 + x2 * y0;
+   // Wenn ein Produkt negativ, das andere positiv ist, koennen sich die Linien schneiden
+   if (crossProduct1 * crossProduct2 < 0) {
+       return true;
+   }
+   return false;
+}		
+		\end{lstlisting}
 \subsection{Punkt in Polygon}
 \lstinputlisting[language=java,firstline=27,firstnumber=1,lastline=59]{PointInPoly.java}
 \section{Verschiedenes}
