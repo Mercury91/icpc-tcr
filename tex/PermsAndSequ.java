@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 public class PermsAndSequ {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -9,7 +8,6 @@ public class PermsAndSequ {
 			Sequences(n, k);
 			Permutations(n);
 		}
-
 	}
 
 	public static void Sequences(int n, int k) {
@@ -35,7 +33,6 @@ public class PermsAndSequ {
 			Print(x);
 		}
 	}
-
 	public static void Permutations(int n) {
 		int[] x = new int[n];
 		for (int i = 0; i < n; i++)
@@ -48,32 +45,24 @@ public class PermsAndSequ {
 					lastX = false;
 					break;
 				}
-			if (lastX)
-				break;
+			if (lastX)	break;
 			int k = n - 1 - 1;
-			
-			while (x[k] > x[k + 1])
-				k--;
+			while (x[k] > x[k + 1])	k--;
 			int t = k + 1;
-
 			while (t < (n - 1) && x[t + 1] > x[k])
 				t++;
-			
 			int tmp = x[k];
 			x[k] = x[t];
 			x[t] = tmp;
 			// reverse x[k+1] ... x[n-1]
-			
 			for (int i = 0; i <= ((n - 1) - (k + 1)) / 2; i++) {
 				tmp = x[k + 1 + i];
 				x[k + 1 + i] = x[n - 1 - i];
 				x[n - 1 - i] = tmp;
-
 			}
 			Print(x);
 		}
 	}
-
 	public static void Print(int[] x) {
 		for (int i = 0; i < x.length; i++)
 			System.out.print(x[i] + " ");

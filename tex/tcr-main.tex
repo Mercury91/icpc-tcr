@@ -1,19 +1,19 @@
-\documentclass[10pt,a4paper,ngerman,oneside,
-%twocolumn
-]{article}
+\documentclass[10pt,a4paper,ngerman,oneside,]{article}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-
+\usepackage{hyperref}
 \setlength{\columnseprule}{0.25pt}
 \linespread{1.180}
 \usepackage{fancyhdr}
-%\usepackage[landscape,left=.5cm,right=.5cm,top=2.1cm,bottom=.5cm]{geometry}
-\usepackage[left=1cm,right=.75cm,top=2.1cm,bottom=.5cm]{geometry}
+\usepackage[left=1.5cm,right=.75cm,top=2.0cm,bottom=.8cm]{geometry}
+\usepackage{lscape}
+%\usepackage[landscape,left=.5cm,right=.5cm,top=2.0cm,bottom=.5cm]{geometry}
+
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[RE,RO]{ACM ICPC Reference, page \bfseries\thepage}
-\fancyhead[LE,LO]{Universität zu Lübeck}
+\fancyhead[R]{ACM ICPC Reference, page \bfseries\thepage}
+\fancyhead[L]{Universität zu Lübeck, Team: No Output}
 
 \usepackage[safe,warn]{textcomp}
 \usepackage{tgtermes}
@@ -24,7 +24,7 @@
 \usepackage{amssymb}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-
+\usepackage{graphicx}
 
 \renewcommand*\ttdefault{txtt}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
@@ -32,30 +32,40 @@
 
 
 \usepackage{listings}
-\lstset{frame=left}
+\lstset{frame=top,mathescape=true,breaklines = true}
 \usepackage{multicol} 
 
 \title{Team Contest Reference}
 \author{Universität zu Lübeck}
 \begin{document}
 \lstset{basicstyle=\ttfamily\footnotesize,numbers=left,numberstyle=\tiny,tabsize=2,numbersep=5pt}
-\maketitle
-\thispagestyle{fancy}
+%\maketitle
+\begin{landscape}
 \begin{multicols}{2}
+\begin{center}
+{\large Team Contest Reference}\\
+Universität zu Lübeck\\
+\includegraphics[scale=.8,clip,trim=.4cm 0cm 6.4cm 0cm,scale=0.89]{img/logo_uzl.pdf}\\
+Team: No Output
+\end{center}
+\thispagestyle{fancy}
+%\begin{multicols}{2}
 \tableofcontents
-\end{multicols}
+%\end{multicols}
+\newcommand{\hash}[1]{{\bfseries MD5:} ~\texttt{#1}}
+\vspace{3em}\noindent MD5: \texttt{cat <string>| tr -d [:space:] | md5sum}
 \newpage
 
 \section{Mathematische Algorithmen}
 \subsection{Primzahlen}
 Für Primzahlen gilt immer (aber nicht nur für Primzahlen)
 \[a^p\equiv a\mod p \quad\text{ bzw. }\quad a^{p-1}\equiv 1 \mod p.\]
-\subsubsection{Sieb des Eratosthenes}
-\lstinputlisting[language=Java]{eratosthenes.java}
+\subsubsection{Sieb des Eratosthenes $\mathcal O(n^2)$}
+\lstinputlisting[language=Java]{eratosthenes.java}\hash{f2241e45384c9165389a8ef7eaffdb24}
 \subsubsection{Primzahlentest}
-\lstinputlisting[language=Java]{isprim.java}
+\lstinputlisting[language=Java]{isprim.java}\hash{ab672f1e03a3f839b6fb0d9b93dd21d0}
 \subsection{Binomial Koeffizient}
-\lstinputlisting[language=Java]{binomial.java}
+\lstinputlisting[language=Java]{binomial.java}\hash{3a459246143bbdc49336d77c9b2720e4}
 \subsection{Eulersche $\varphi$-Funktion}
 $\varphi(n\in\N):=|\{a\in\N |1\leq a \leq n \wedge \ggT (a,n)=1\}|$\\
 $\varphi(n\cdot m)=\varphi(n)\cdot\varphi(m)$
@@ -79,71 +89,33 @@ function modular_pow(base, exponent, modulus)
         base = (base * base) mod modulus
     return result
 \end{lstlisting}
-\subsection{Kreuzprodukt}
-$\vec{a}\times\vec{b}
-  =
-  \begin{pmatrix}a_1 \\ a_2 \\ a_3\end{pmatrix}
-  \times
-  \begin{pmatrix}b_1 \\ b_2 \\ b_3 \end{pmatrix}
-  =
-  \begin{pmatrix}
-    a_2b_3 - a_3b_2 \\
-    a_3b_1 - a_1b_3 \\
-    a_1b_2 - a_2b_1
-  \end{pmatrix}$
-\subsection{Orthogonale Projektion}
-$r_0:$ Ortsvektor; $u:$ Richtungsvektor; $n:$ Normalenvektor\\
-$P_g(\vec x) =  \vec r_0 + \frac{( \vec x - \vec r_0 ) \cdot \vec u}{\vec u \cdot \vec u} \, \vec u$\\
-$P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \vec n} \, \vec n$(nur 2D bzw. 3D auf Ebene)\\
-\subsection{Geradenschnittpunkt}
-$g_1: ax+by=c;\,g_2: px+qx=r;\;\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
-x = cq-br\\y=ar-cp
-\end{pmatrix}$\\
-$
-g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end{pmatrix}\;
-g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\; w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
-\Rightarrow D=(s_xt_y-t_xs_y)\, D_s=(t_xw_y-t_yw_x)\,D_t=(s_yw_x-s_xw_y)\; s=D_s/D, t=D_t/D$
-\subsection{Trigonometrie}
-\renewcommand{\tan}{\ensuremath{\operatorname{tan}}}
-\renewcommand{\cot}{\ensuremath{\operatorname{cot}}}
-\subsubsection{Additionstheoreme}
-$\sin ( x \pm y ) = \sin x \; \cos y \pm \sin y \; \cos x $\\
-$\cos ( x \pm y ) = \cos x \; \cos y \mp \sin x \; \sin y $\\
-$\tan ( x + y ) = \frac{ \tan x + \tan y }{ 1 - \tan x \; \tan y } = \frac{ \sin (x + y) }{ \cos (x + y) }\\
-\tan ( x - y ) = \frac{ \tan x - \tan y }{ 1 + \tan x \; \tan y } = \frac{ \sin (x - y) }{ \cos (x - y) }\\
-\cot \left( x+y\right) =\frac{\cot x\cot y-1}{\cot x+\cot y} = \frac{ \cos (x + y) }{ \sin (x + y) }$\\
-$\cot \left( x-y\right) =\frac{\cot x\cot y+1}{\cot y -\cot x} = \frac{ \cos (x - y) }{\sin (x - y)}$\\
-$\sin ( x + y ) \cdot \sin ( x - y ) = \cos^2 y - \cos^2 x  = \sin^2 x - \sin^2 y $\\
-$\cos ( x + y ) \cdot \cos ( x - y ) = \cos^2 y - \sin^2 x  = \cos^2 y + \cos^2 x - 1= 1-\sin^2 x - \sin ^2 y
-$\\
-\subsubsection{Kosinussatz}
-$c^2=a^2+b^2-2\,a\,b\,\cos\gamma$ 
-\subsection{Zusammenhang Kreuzprodukt \& Sinus}
-$|\vec{a}\times\vec{b}|=|\vec{a}| \, | \vec{b} | \, \sin \measuredangle (\vec{a},\vec{b})$
-\subsection{Dreicksfläche}
-$F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
+
+
+\subsection{Modulare Arithmetik}
+Bedeutung der größten gemeinsamen Teiler ($[d = ggT(a,b),s,t]:=\textsc{EEA}(a,b)$):
+\[ d = \text{ggT}(a,b) = as+bt. \]
+Verwendung zur Berechnung des inversen Elements $b^{-1}$ zu $b$ bezüglich der Basis einer Restklassengruppe $a\in\mathbb{P}$ ($1\equiv b^{-1}b \mod 1$). :\\
+$d=1\Rightarrow 1\equiv t\cdot b (\mod a)\Rightarrow b^{-1}:=t$\\
+$d\neq 1 \Rightarrow b^{-1}$ existiert nicht bzgl $a,b$.
+\subsubsection{Erweiterter Euklidischer Algorithmus}
+\lstinputlisting[language=Java]{eea.java}\hash{ec47623482e3cf5297ebe446e8eafd5}
 \subsection{Kombinatorik}
 \begin{tabular}{|c||c|c|}\hline
  & mit ZL & ohne ZL\\\hline\hline
 Variationen & $n^k$ & $\frac{n!}{(n-k)!}$\\\hline
 Kombinationen & $\binom{n}{k}=\binom{n}{n-k}=\frac{n!}{k!(n-k)!}$ & $\binom{n+k-1}{k}=\binom{n+k-1}{n-1}$\\\hline
 \end{tabular}
-
-\subsection{Modulare Arithmetik}
-Bedeutung der größten gemeinsamen Teiler:
-\[ d = \text{ggT}(a,b) = as+bt \]
-Verwendung zu Berechnung des inversen Elements $b$ zu $a$ bezüglich einer Restklassengruppe $n$ ($a$ und $n$ müssen teilerfremd sein):
-\[ ab\equiv 1 \mod n\quad\Leftrightarrow\quad s\equiv b \mod n\quad\text{ für }1=\text{ggT}(a,n)\]
-\subsubsection{Erweiterter Euklidischer Algorithmus}
-\lstinputlisting[language=Java]{eea.java}
-
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
-\lstinputlisting[language=Java]{fenwick.java}
-
-\section{Graphenalgorithmen}
+\lstinputlisting[language=Java]{fenwick.java}\hash{da8d56a0188958c7d35409b7a6fb7a9c}
+\section{Graphen}
+Graph $G=(V,E)$ mit Kanten $E$ und Knoten $V$. i.A.:$n=|V(G)|, m=|E|$\\
+Es gilt: $m=n-1$ gdw. $G$ Baum; $2|\deg(v\in V)$ gdw. ex. Eulerkreis und $G$ (stark, falls gerichtet) zusammenhängend.
+\subsection{planare Graphen}
+$|E|\leq3|V|-6$ (notwendige Bedingung)
+oder Eulersche Polyederformel $|V|+|F|-|E|=2$
 \subsection{Topologische Sortierung}
-\lstinputlisting[language=Java]{toposort.java}
+\lstinputlisting[language=Java]{toposort.java}\hash{f89e486b31561403ed45869c9ca5b180}
 \subsection{Prim (Minimum Spanning Tree)}
 \lstinputlisting[language=c]{prim.c}
 \subsection{Kruskal}
@@ -197,6 +169,19 @@ public static LinkedList<Edge> kruskal(LinkedList<Edge> adjList, int root, int n
 
 	return result;
 }		
+\end{lstlisting}
+\subsection{Floyd-Warshal ($\mathcal{O}(n^3)$)}
+\begin{lstlisting}[language=java]
+for(int i = 0; i<n; i++)
+	for(int j = 0; j<n; j++) 
+		if($(i,j)\in E(G)$){
+			d[i,j] = w[i,j];
+		else
+			d[i,j] = $\infty$
+for(int k = 0; k<n; k++)
+	for(int i = 0; i<n; i++)
+		for(int j = 0; j<n; j++) 
+	     d[i,j] = min (d[i,j],d[i,k] + d[k,j]);
 \end{lstlisting}
 \subsection{Dijkstra}
 		
@@ -277,51 +262,55 @@ procedure BellmanFord(list vertices, list edges, vertex source)
        if u.distance + uv.weight < v.distance:
            error "Graph contains a negative-weight cycle"
 \end{lstlisting}
-\subsection{FordFulkerson}
-\lstinputlisting[language=java]{FordFulkerson.java}
-\subsection{Bipartite Matching}
-\subsubsection{JAVA}
-\lstinputlisting[language=java]{BipartiteMatching.java}
-\subsubsection{fast implementaion}
-\begin{lstlisting}[language=Java]
- int m, n;
-    boolean[][] graph;
-    boolean seen[];
-    int matchL[]; //What left vertex i is matched to (or -1 if unmatched)
-    int matchR[]; //What right vertex j is matched to (or -1 if unmatched)
-
-    int maximumMatching() {
-        //Read input and populate graph[][]
-        //Set m to be the size of L, n to be the size of R
-        Arrays.fill(matchL, -1);
-        Arrays.fill(matchR, -1);
-
-        int count = 0;
-        for (int i = 0; i < m; i++) {
-            Arrays.fill(seen, false);
-            if (bpm(i)) count++;
-        }
-        return count;
-    }
-
-    boolean bpm(int u) {
-        //try to match with all vertices on right side
-        for (int v = 0; v < n; v++) {
-            if (!graph[u][v] || seen[v]) continue;
-            seen[v] = true;
-            //match u and v, if v is unassigned, or if v's match on the left side can be reassigned to another right vertex
-            if (matchR[v] == -1 || bpm(matchR[v])) {
-                matchL[u] = v;
-                matchR[v] = u;
-                return true;
-            }
-        }
-        return false;
-    }
+\subsection{MaxFlow}
+\lstinputlisting[language=java]{Flow.java}
+\hash{a29c73a7d958ca12f3778a65c39a2e3e}
+\section{Geometrie}
+\subsection{Kreuzprodukt, Skalarprodukt}
+$\vec{a}\times\vec{b}
+  =
+  \begin{pmatrix}a_1 \\ a_2 \\ a_3\end{pmatrix}
+  \times
+  \begin{pmatrix}b_1 \\ b_2 \\ b_3 \end{pmatrix}
+  =
+  \begin{pmatrix}
+    a_2b_3 - a_3b_2 \\
+    a_3b_1 - a_1b_3 \\
+    a_1b_2 - a_2b_1
+  \end{pmatrix}$,~~$\langle a,b\rangle=\sum a_ib_i=|a||b|\cos(\angle(a,b))$
+\subsection{Orthogonale Projektion}
+$r_0:$ Ortsvektor; $u:$ Richtungsvektor; $n:$ Normalenvektor\\
+$P_g(\vec x) =  \vec r_0 + \frac{( \vec x - \vec r_0 ) \cdot \vec u}{\vec u \cdot \vec u} \, \vec u$\\
+$P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \vec n} \, \vec n$(nur 2D bzw. 3D auf Ebene)\\
+\subsection{Rotation}
+\begin{lstlisting}[language=java]
+	static Point rotate(Point v, double a) {
+		double cos = Math.cos(a);
+		double sin = Math.sin(a);
+		double x = cos * v.x - sin * v.y;
+		double y = sin * v.x + cos * v.y;
+		return new Point(x, y);
+	}
 \end{lstlisting}
-\section{Geometrische Algorithmen}
+\subsection{Geradenschnittpunkt}
+$g_1: ax+by=c;\,g_2: px+qx=r;\;\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
+x = cq-br\\y=ar-cp
+\end{pmatrix}$\\
+$
+g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end{pmatrix}\;
+g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\; w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
+\Rightarrow D=(s_xt_y-t_xs_y),\, D_s=(t_xw_y-t_yw_x),\,
+D_t=(s_yw_x-s_xw_y)\,; s=D_s/D, t=D_t/D$
+
+\renewcommand{\tan}{\ensuremath{\operatorname{tan}}}
+\renewcommand{\cot}{\ensuremath{\operatorname{cot}}}
+\subsection{Zusammenhang Kreuzprodukt \& Sinus}
+$|\vec{a}\times\vec{b}|=|\vec{a}| \, | \vec{b} | \, \sin \measuredangle (\vec{a},\vec{b})$
+\subsection{Dreicksfläche}
+$F=\sqrt{s(s-a)(s-b)(s-c)};\,s=\frac{a+b+c}{2}$
+
 \subsection{Graham Scan (Convex Hull)}
-\lstinputlisting[language=java]{graham.java}
+\lstinputlisting[language=java]{GrahamScan.java}\hash{fa3b15e54ec7447485870a1978f8aac4}
 \subsection{Line Intersection}
 	\begin{itemize}
 		\item \textbf{Mehr als 2 Linien:}
@@ -377,7 +366,111 @@ bool checkLines(line a, line b) {
 }		
 		\end{lstlisting}
 \subsection{Punkt in Polygon}
-\lstinputlisting[language=java,firstline=27,firstnumber=1,lastline=59]{PointInPoly.java}
+ KreuzProdTest: -1: $A\to R$ schneidet $BC$ (ausser unterer Endpunkt);~ $0: A$ auf $BC$;  +1: sonst\\
+ PiP: Input: P[i] (x[i],y[i]); P[0]:=P[n]; Output: -1: $Q$ außerhalb Polygon, 0: $Q$ auf Polygon, +1: $Q$ innerhalb des Polygons
+\lstinputlisting[language=java]{PointInPoly.java}\hash{38a79d6979334bc6a01381e15eef6e04 }
+\subsection{Fläche eines Polygons}
+Input: Polygon-Koordinaten sortiert im Uhrzeigersinn
+\lstinputlisting[language=java]{PolyArea.java}\hash{1f1dbdaaf78726c57e3e0ece63fe1cb3}
+\section{2-SAT-Solver}
+\subsection{2-Sat mit SCC}
+\lstinputlisting[language=java,firstnumber=1]{2-sat-scc.java}
+\subsection{Hilfsalgorithmen}
+\subsubsection{Erzeugen eines Graphens}
+\begin{lstlisting}[]
+SAT2Graph($\varphi=(\alpha_1 \vee\beta_1)\wedge \dots \wedge (\alpha_m,\beta_m)$){}
+	G: Graph als Adjazenzliste
+	for(int i =  0 < m; i++){
+		jede Klausel liefert zwei Implikationen 
+		Fuege Kanten $(-\alpha_i , \beta_i),(-\beta_i , \alpha_i)$ zu $G$ hinzu.
+}
+\end{lstlisting}
+\subsubsection{Indexumrechnung}
+\begin{lstlisting}
+/** rechnet den Index fure den Array Zugriff um */
+idx(int i) :=  n + i + ((i > 0) ? (-1) : 0)
+\end{lstlisting}
+\subsection{Suchen eines Pfades}
+\begin{lstlisting}
+/** 
+Prueft mithilfe einer Breitensuche ob ein Weg 
+von Knoten x nach -x existiert
+ */
+ boolean BFSSATCheck(SATGraph G,int x) {
+	boolean[] seen = new boolean[2 * n];
+	Queue<Integer> queue;
+	queue.add(x);	seen[idx(x)] = true;
+	while (!queue.isEmpty()) {
+		Integer q = queue.poll();
+		for (Integer p : G.get(idx(q))) {
+			if (!seen[idx(p)]) {
+				queue.add(p);
+				seen[idx(p)] = true;
+			}
+			if (p == -x) return true;
+		}
+	}
+	return seen[idx(-x)];
+}
+\end{lstlisting}
+
+\subsection{Algorithmus zum Prüfen der Erfüllbarkeit}
+\begin{lstlisting}[]
+/** 
+Prueft ob fuer eine 2-CNF eine Belegung existiert 
+*/
+boolean SAT2Check($\varphi=(\alpha_1 \vee\beta_1)\wedge \dots \wedge (\alpha_n,\beta_n)$){
+	SAT2Graph G($\varphi$) erzeugen
+	for(int i = 0 < n; i++)
+		if(BFSSATCheck(G,i) &&	BFSSATCheck(G,-i))	
+			return false; 
+			//Es gibt einen $i\to -i$ und $-i \to i$ Weg
+	return true;
+}
+
+\end{lstlisting}
+\subsection{Algorithmus zur Belegung einer 2-CNF}
+\begin{lstlisting}
+/**
+* Ermittelt falls moeglich eine gueltige Belegung fuer eine 2-CNF
+*/
+Solve2SAT($\varphi=(\alpha_1 \vee\beta_1)\wedge \dots \wedge (\alpha_n,\beta_n)$){
+	SAT2Graph G($\varphi$) erzeugen
+	vars = [0,...,0] //(2*n) Variablenbelegung
+	assigned = [false,...,false] //(n+1) Belegung zugewiesen?
+
+	for (int x = 1; x < n + 1; x++) {
+		oldVars =  vars.clone();oldAssigned = assigned.clone();
+		if (assign(vars, assigned, x)) 	
+			continue; //x:=1
+		
+		vars =  oldVars;assigned =  oldAssigned;
+		if (!assign(vars, assigned, -x)) 
+			return null;//x:=0 liefert auch keine Loesung
+	}
+	return vars; //gueltige Belegung
+}
+
+/**
+ * Belegt die Variable x mit $\texttt{1}$ und liefert $\texttt{false}$, 
+ * falls dies nicht moeglich ist
+ * WICHTIG: Parameter werden veraendert (Referenzen uebergeben!). 
+ */
+boolean assign(ArrayList<Integer> vars,
+		ArrayList<Boolean> assigned, int x) {
+	int xi = (x < 0) ? -x : x;
+	if (assigned[xi]) return (vars[idx(x)] == 1);
+	//Belege x, -x mit 0,1:
+	vars[idx(x)]= 1;vars[idx(-x)]=0;
+	assigned[xi] = true;
+	for (Integer k : G.get(idx(x))) 
+		if (!assign(vars, assigned, k)) {
+			//Belegung nicht weiter moeglich
+			assigned[xi] = false; return false; 
+		}
+	return true;
+}
+\end{lstlisting}
 \section{Verschiedenes}
 \subsection{Potenzmenge}
 \lstinputlisting[language=java]{powerset.java}
@@ -389,6 +482,9 @@ bool checkLines(line a, line b) {
 \lstinputlisting[language=c++]{longestIncreasingSubsequence.cpp}
 \subsection{Permutation \& Sequenzen}
 \lstinputlisting[language=java]{PermsAndSequ.java}
+\subsection{Knuth-Morris Pratt}
+Finds the first occurrence of the pattern in the text.
+\lstinputlisting[language=java]{KMP.java}\hash{b5b9ca67a1df2c7c2913615bf1ed8a5b}
 \section{Formatierung \& Sonstiges}
 \subsection{Ausgabeformatierung mit JAVA - \texttt{DecimalFormat}}
 \begin{tabular}{cl}
@@ -489,5 +585,21 @@ int main(){
 	} while(!cin.eof());
 }
 \end{lstlisting}
+\end{multicols}
+\end{landscape}
+%\onecolumn
+%\newcommand\extf[1]{\includegraphics[page=#1,clip,trim=.373cm 0cm 0.5cm 0cm,scale=0.89,angle=-90]{tcs-cheat-sheet.pdf}}
+\newcommand\extf[1]{\includegraphics[page=#1,clip,trim=.573cm 0cm 0.5cm 0cm,scale=0.90]{tcs-cheat-sheet.pdf}}
+\extf{1}\newpage
+\extf{2}\newpage
+\extf{3}\newpage
+\extf{4}\newpage
+\extf{5}\newpage
+\extf{6}\newpage
+\extf{7}\newpage
+\extf{8}\newpage
+\extf{9}\newpage
+\extf{10}\newpage
+
 
 \end{document}
