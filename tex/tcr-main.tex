@@ -62,7 +62,18 @@
 \vfill
 %\end{multicols}
 \newcommand{\hash}[1]{{\bfseries MD5:} ~\texttt{#1}}
-\vspace{3em}\noindent MD5: \texttt{cat <string>| tr -d [:space:] | md5sum}
+\vspace{3em}\noindent MD5: \texttt{cat <string>| tr -d [:space:] | md5sum}\\
+
+\par\noindent Testscript \texttt{<ProblemClass>}:
+\begin{lstlisting}[language=bash,mathescape=false]
+#!/bin/bash
+homefolder="/home/team"
+folder="$homefolder/test-session"
+cd $homefolder/workspace/$1/src/
+javac -encoding UTF-8 -d . "$1.java"
+cat $folder/$1/sample.in | java -Xrs -Xss8m -Xmx1272864k $1 > $folder/$1/myout.out
+diff -u $folder/$1/sample.out $folder/$1/myout.out
+\end{lstlisting}
 \newpage
 
 \section{Mathematische Algorithmen}
@@ -277,6 +288,10 @@ procedure BellmanFord(list vertices, list edges, vertex source)
 \subsection{Bipartite Matching}
 \lstinputlisting[language=java]{BPM.java}
 \hash{--------------------------------}
+\subsection{Bitonic TSP}
+All nodes $n_i$ are sorted in $x$-direction; $d(i,j)$ is the distance:
+\lstinputlisting[language=java]{algorithms/bitonicTSP.java}
+\hash{49fca508fb184da171e4c8e18b6ca4c7}
 \section{Geometrie}
 \subsection{Kreuzprodukt, Skalarprodukt}
 $\vec{a}\times\vec{b}
