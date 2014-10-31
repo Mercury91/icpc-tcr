@@ -7,7 +7,7 @@
 \linespread{1.180}
 \usepackage{fancyhdr}
 \usepackage[left=1.5cm,right=.75cm,top=2.0cm,bottom=.8cm]{geometry}
-\usepackage{lscape}
+%\usepackage{lscape}
 %\usepackage[landscape,left=.5cm,right=.5cm,top=2.0cm,bottom=.5cm]{geometry}
 
 \pagestyle{fancy}
@@ -17,7 +17,7 @@
 
 \usepackage[safe,warn]{textcomp}
 \usepackage{tgtermes}
-\usepackage[scaled]{berasans}
+%\usepackage[scaled]{berasans}
 \usepackage{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -25,6 +25,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{graphicx}
+\usepackage{xcolor}
+
+\definecolor{darkgreen}{rgb}{0,0.5,0}
 
 \renewcommand*\ttdefault{txtt}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
@@ -32,7 +35,12 @@
 
 
 \usepackage{listings}
-\lstset{frame=top,mathescape=true,breaklines = true}
+\lstset{frame=top,
+	mathescape=true,
+	breaklines = true, 
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{darkgreen}\itshape\rmfamily,
+	language=java}
 \usepackage{multicol} 
 
 \title{Team Contest Reference}
@@ -40,17 +48,18 @@
 \begin{document}
 \lstset{basicstyle=\ttfamily\footnotesize,numbers=left,numberstyle=\tiny,tabsize=2,numbersep=5pt}
 %\maketitle
-\begin{landscape}
-\begin{multicols}{2}
+%\begin{landscape}
 \begin{center}
-{\large Team Contest Reference}\\
-Universität zu Lübeck\\
-\includegraphics[scale=.8,clip,trim=.4cm 0cm 6.4cm 0cm,scale=0.89]{img/logo_uzl.pdf}\\
-Team: No Output
+	{\large Team Contest Reference}\\
+	Universität zu Lübeck\\
+	\includegraphics[scale=.8,clip,trim=.4cm 0cm 6.4cm 0cm,scale=0.89]{img/logo_uzl.pdf}\\
+	Team: No Output
 \end{center}
+\begin{multicols}{2}
 \thispagestyle{fancy}
 %\begin{multicols}{2}
 \tableofcontents
+\vfill
 %\end{multicols}
 \newcommand{\hash}[1]{{\bfseries MD5:} ~\texttt{#1}}
 \vspace{3em}\noindent MD5: \texttt{cat <string>| tr -d [:space:] | md5sum}
@@ -102,8 +111,8 @@ $d\neq 1 \Rightarrow b^{-1}$ existiert nicht bzgl $a,b$.
 \subsection{Kombinatorik}
 \begin{tabular}{|c||c|c|}\hline
  & mit ZL & ohne ZL\\\hline\hline
-Variationen & $n^k$ & $\frac{n!}{(n-k)!}$\\\hline
-Kombinationen & $\binom{n}{k}=\binom{n}{n-k}=\frac{n!}{k!(n-k)!}$ & $\binom{n+k-1}{k}=\binom{n+k-1}{n-1}$\\\hline
+Variat. & $n^k$ & $\frac{n!}{(n-k)!}$\\\hline
+Kombinat. & $\binom{n}{k}=\binom{n}{n-k}=\frac{n!}{k!(n-k)!}$ & $\binom{n+k-1}{k}=\binom{n+k-1}{n-1}$\\\hline
 \end{tabular}
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
@@ -265,6 +274,9 @@ procedure BellmanFord(list vertices, list edges, vertex source)
 \subsection{MaxFlow}
 \lstinputlisting[language=java]{Flow.java}
 \hash{a29c73a7d958ca12f3778a65c39a2e3e}
+\subsection{Bipartite Matching}
+\lstinputlisting[language=java]{BPM.java}
+\hash{--------------------------------}
 \section{Geometrie}
 \subsection{Kreuzprodukt, Skalarprodukt}
 $\vec{a}\times\vec{b}
@@ -586,7 +598,7 @@ int main(){
 }
 \end{lstlisting}
 \end{multicols}
-\end{landscape}
+%\end{landscape}
 %\onecolumn
 %\newcommand\extf[1]{\includegraphics[page=#1,clip,trim=.373cm 0cm 0.5cm 0cm,scale=0.89,angle=-90]{tcs-cheat-sheet.pdf}}
 \newcommand\extf[1]{\includegraphics[page=#1,clip,trim=.573cm 0cm 0.5cm 0cm,scale=0.90]{tcs-cheat-sheet.pdf}}
