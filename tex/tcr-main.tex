@@ -529,7 +529,7 @@ X &	Alle anderen Zeichen X können ganz normal benutzt werden.\\
 ' &	Ausmarkieren von speziellen Symbolen im Präfix oder Suffix \\
 \end{tabular}
 \subsection{Ausgabeformatierung mit \texttt{printf}}
-%\begin{multicols}{2}
+\begin{multicols}{2}
 \begin{verbatim}
 %d %i	Decimal signed integer.
 %o	Octal int.
@@ -545,7 +545,7 @@ X &	Alle anderen Zeichen X können ganz normal benutzt werden.\\
 0  	  Felder mit 0 ausfüllen 
       (an Stelle von Leerzeichen).
 \end{verbatim}
-%\columnbreak
+\columnbreak
 \begin{verbatim}
 
 +	  Vorzeichen immer ausgeben.
@@ -561,11 +561,11 @@ blank  pos. Zahlen mit Leerzeichen beg.
  %#G  Dezimalpunkt immer anzeigen. 
       Nullen nach Dzmpkt. bleiben
 \end{verbatim}
-%\end{multicols}
-\begin{verbatim}
+\end{multicols}
+\begin{lstlisting}[	commentstyle=\color{darkgreen}\ttfamily,]
 int i = 123;
 printf( "|%d|   |%d|\n" ,     i, -i);    // |123|   |-123|
-printf( "|%5d| |%5d|\n" ,     i, -i);    // |  123| | –123|
+printf( "|%5d| |%5d|\n" ,     i, -i);    // |  123| | -123|
 printf( "|%-5d| |%-5d|\n" ,   i, -i);    // |123  | |-123 |
 printf( "|%+-5d| |%+-5d|\n" , i, -i);    // |+123 | |-123 |
 printf( "|%05d| |%05d|\n\n",  i, -i);    // |00123| |-0123|
@@ -575,7 +575,7 @@ double d = 1234.5678;
 printf( "|%f| |%f|\n" ,         d, -d);  // |1234,567800| |-1234,567800|
 printf( "|%.2f| |%.2f|\n" ,     d, -d);  // |1234,57| |-1234,57|
 printf( "|%10f| |%10f|\n" ,     d, -d);  // |1234,567800| |-1234,567800|
-printf( "|%10.2f| |%10.2f|\n" , d, -d);  // |   1234,57| |  –1234,57|
+printf( "|%10.2f| |%10.2f|\n" , d, -d);  // |   1234,57| |  -1234,57|
 printf( "|%010.2f| |%010.2f|\n",d, -d);  // |0001234,57| |-001234,57|
 String s = "Monsterbacke";
 printf( "\n|%s|\n", s );                 // |Monsterbacke|
@@ -584,7 +584,7 @@ printf( "|%-20s|\n", s );                // |Monsterbacke        |
 printf( "|%7s|\n", s );                  // |Monsterbacke|
 printf( "|%.7s|\n", s );                 // |Monster|
 printf( "|%20.7s|\n", s );               // |             Monster|
-\end{verbatim}
+\end{lstlisting}
 \subsection{C++ Eingabe ohne bekannt Länge}
 \begin{lstlisting}[language=C++]
 #include <iostream>
