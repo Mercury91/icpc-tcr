@@ -61,9 +61,22 @@
 %\begin{multicols}{2}
 \tableofcontents
 \vfill
+\vspace{.5em}{\centering
+\hfill\begin{tabular}{rl}
+	\hline $n$ & Runtime $100\cdot 10^{6}$ in $3$s \\\hline
+	$[10,11]$ & $\mathcal{O}(n!)$ \\
+	$<22$ & $\mathcal{O}(n2^n)$ \\
+	$\leq 100$ & $\mathcal{O}(n^4)$ \\
+	$\leq 400$ & $\mathcal{O}(n^3)$ \\
+	$\leq 2.000$ & $\mathcal{O}(n^2\log n)$ \\
+	$\leq 10.000$ & $\mathcal{O}(n^2)$ \\
+	$\leq 1.000.000$ & $\mathcal{O}(n\log n)$ \\
+	$\leq 100.000.000$ & $\mathcal{O}(n)$ \\\hline
+\end{tabular}\hfill}
+
 %\end{multicols}
 \newcommand{\hash}[1]{{\bfseries MD5:} ~\texttt{#1}}
-\vspace{3em}\noindent MD5: \texttt{cat <string>| tr -d [:space:] | md5sum}\\
+\vspace{2.5em}\noindent {MD5:} \texttt{cat <string>| tr -d [:space:] | md5sum}\\
 
 \par\noindent Testscript \texttt{<ProblemClass>}:
 \begin{lstlisting}[language=bash,mathescape=false]
@@ -218,9 +231,7 @@ public static LinkedList<Edge> kruskal(LinkedList<Edge> adjList, int root, int n
 			}
 		}
 	}
-
-	return result;
-}		
+	return result;}		
 \end{lstlisting}
 \subsection{Floyd-Warshal ($\mathcal{O}(n^3)$)}
 \begin{lstlisting}[language=java]
@@ -356,13 +367,14 @@ $P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \
 	}
 \end{lstlisting}
 \subsection{Geradenschnittpunkt}
-$g_1: ax+by=c;\,g_2: px+qx=r;\\\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
+$g_1: ax+by=c;\,g_2: px+qx=r;$\\
+$\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
 x = cq-br\\y=ar-cp
 \end{pmatrix}$\\
 $
 g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end{pmatrix}\;
-g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\\ w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
-\Rightarrow D=(s_xt_y-t_xs_y),\, D_s=(t_xw_y-t_yw_x),\,
+g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}$\\ $w_x=(r_x-q_x),  w_y=(r_y-q_y)$\\
+$\Rightarrow D=(s_xt_y-t_xs_y),\, D_s=(t_xw_y-t_yw_x),\,
 D_t=(s_yw_x-s_xw_y)\,; s=D_s/D, t=D_t/D$
 
 \renewcommand{\tan}{\ensuremath{\operatorname{tan}}}
@@ -543,14 +555,15 @@ boolean assign(ArrayList<Integer> vars,
 \lstinputlisting[language=java,firstline=27,firstnumber=1,lastline=66]{LongestSubstring.java}
 \subsection{LongestIncreasingSubsequence}
 \lstinputlisting[language=c++]{longestIncreasingSubsequence.cpp}
-%\subsection{Edit-Distance}
-%\lstinputlisting[language=java]{algorithms/edit.java}
-%\hash{----------------------}
+\subsection{Levenstein-Distanz}
+\lstinputlisting[language=java]{algorithms/lev.java}\hash{0ce8646f55ffe178751ea0debc9739dd}
 \subsection{Permutation \& Sequenzen}
 \lstinputlisting[language=java]{PermsAndSequ.java}
 \subsection{Knuth-Morris Pratt}
 Finds the first occurrence of the pattern in the text.
 \lstinputlisting[language=java]{KMP.java}\hash{b5b9ca67a1df2c7c2913615bf1ed8a5b}
+
+
 \subsection{\textsc{proposal}-Algorithmus (Stable Matching)}
 \textbf{Laufzeit:} $\Theta(n\log n),\mathcal{O}(n^2)$\\
 \textbf{Input:} Menge $J=\{j_1,j_2,\dots,j_n\}, M=\{m_1,m_2,\dots,m_n\},$ Ordnung $O(x)$ auf $J$ bzw. $M$ je $m\in M$ bzw. $j\in J$: \\$O(m_i): j_{i_1}>j_{i_2}>\dots > j_{i_n}$\\

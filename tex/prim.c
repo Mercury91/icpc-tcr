@@ -19,9 +19,7 @@ int baum( int **matrix, int N){
 	for( i=1; i<N; i++){
         if( dist[i] > matrix[i][nextIndex]){
             dist[i] = matrix[i][nextIndex];
-        }
-    }
-
+        }  }
 	while( 1){
 		int nextDist = INF, nextIndex = -1;
 
@@ -51,7 +49,6 @@ int baum( int **matrix, int N){
             }
 		}
 	}
-
 	return sum;
 }
 
