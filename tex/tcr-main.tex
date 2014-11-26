@@ -53,7 +53,8 @@
 	{\large Team Contest Reference}\\
 	Universität zu Lübeck\\
 	\includegraphics[scale=.8,clip,trim=.4cm 0cm 6.4cm 0cm,scale=0.89]{img/logo_uzl.pdf}\\
-	Team: No Output
+	Team: { No Output }\\
+\itshape	Paul Ketelsen, Mathis Lichtenberger, Malte Skambath\\
 \end{center}
 \begin{multicols}{2}
 \thispagestyle{fancy}
@@ -93,9 +94,16 @@ $\varphi(n\cdot m)=\varphi(n)\cdot\varphi(m)$
 \section{Mathematisch Formeln und Gesetze}
 \subsection{Catalan}
 $C_n = \frac1{n+1}\binom{2n}{n}=\prod_{k=2}^n (n+k)/k$\\
-$C_{n+1} = \frac{4n+2}{n+2}C_n=\sum_{k=0}^{n}C_kC_{n-k}$
+$C_{n+1} = \frac{4n+2}{n+2}C_n=\sum_{k=0}^{n}C_kC_{n-k}$\\
+$C_0 = 1;\;C_n = \frac{2(2n-1)}{n+1}C_{n-1}$\\
+
+number of distinct binary trees with $n$ vertices; number of expressions using $n$-pairs of correct placed parentheses;
+	number of possible polygon triangulations.
+
 \subsection{kgV und ggT}
-$ggT(n,m)\cdot kgV(m,n)=|m\cdot n|$
+$ggT(n,m)\cdot kgV(m,n)=|m\cdot n|$\\
+\lstinline[language=Java]|int gcd(int a, int b){return (b==0)?a:gcd(b,a %b);}|\\
+\lstinline[language=Java]|int lcm(int a, int b){return a*(b/gcd(a,b));}|
 \subsection{modulare Exponentiation}
 $b^e \equiv c (\mod) m$\\
 $b^e = b^{\left( \sum_{i=0}^{n-1} a_i 2^i \right)} = \prod_{i=0}^{n-1} \left( b^{2^i} \right) ^ {a_i}$
@@ -128,6 +136,30 @@ Kombinat. & $\binom{n}{k}=\binom{n}{n-k}=\frac{n!}{k!(n-k)!}$ & $\binom{n+k-1}{k
 \section{Datenstukturen}
 \subsection{Fenwick Tree (Binary Indexed Tree)}
 \lstinputlisting[language=Java]{fenwick.java}\hash{da8d56a0188958c7d35409b7a6fb7a9c}
+\subsection{Union-Find}
+\begin{lstlisting}[language=Java]
+int rank[MAX_N];//upper bound on the length of the path from the root to a leaf
+int rep[MAX_N];
+
+void makeSet(int x) {
+	rank[x] = 0;
+	rep[x] = x;
+}
+int findSet(int x) {
+if (x != rep[x]) rep[x] = findSet(rep[x]); //path compression
+	return rep[x];
+}
+void link(int x, int y) {
+	if (rank[x] > rank[y]) rep[y] = x;//join according to rang
+	else {
+		if (rank[x] == rank[y]) rank[y]++;
+		rep[x] = y;
+	}
+}
+void unionSet(int x, int y) {
+	link(findSet(x), findSet(y));
+}
+\end{lstlisting}
 \section{Graphen}
 Graph $G=(V,E)$ mit Kanten $E$ und Knoten $V$. i.A.:$n=|V(G)|, m=|E|$\\
 Es gilt: $m=n-1$ gdw. $G$ Baum; $2|\deg(v\in V)$ gdw. ex. Eulerkreis und $G$ (stark, falls gerichtet) zusammenhängend.
@@ -292,6 +324,10 @@ procedure BellmanFord(list vertices, list edges, vertex source)
 All nodes $n_i$ are sorted in $x$-direction; $d(i,j)$ is the distance:
 \lstinputlisting[language=java]{algorithms/bitonicTSP.java}
 \hash{49fca508fb184da171e4c8e18b6ca4c7}
+\subsection{Shortest Cycle}
+Ln. 22 prevents double edges and taking undirected edges backwards. 
+\lstinputlisting[language=java]{algorithms/minCycle.java}
+\hash{bf74ce626179378dcc19a599f6d491d6}
 \section{Geometrie}
 \subsection{Kreuzprodukt, Skalarprodukt}
 $\vec{a}\times\vec{b}
@@ -320,12 +356,12 @@ $P_g(\vec x) = \vec x - \frac{( \vec x - \vec r_0 ) \cdot \vec n}{\vec n \cdot \
 	}
 \end{lstlisting}
 \subsection{Geradenschnittpunkt}
-$g_1: ax+by=c;\,g_2: px+qx=r;\;\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
+$g_1: ax+by=c;\,g_2: px+qx=r;\\\Rightarrow \vec{p}=\frac{1}{aq-bp}\begin{pmatrix}
 x = cq-br\\y=ar-cp
 \end{pmatrix}$\\
 $
 g_1: \vec{p}=\begin{pmatrix}r_x\\r_y\end{pmatrix}+ s \begin{pmatrix}s_x\\s_y\end{pmatrix}\;
-g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\; w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
+g_2: \vec{p}=\begin{pmatrix}q_x\\q_y\end{pmatrix}+ t \begin{pmatrix}t_x\\t_y\end{pmatrix}\\ w_x=(r_x-q_x),  w_y=(r_y-q_y)\\
 \Rightarrow D=(s_xt_y-t_xs_y),\, D_s=(t_xw_y-t_yw_x),\,
 D_t=(s_yw_x-s_xw_y)\,; s=D_s/D, t=D_t/D$
 
@@ -507,6 +543,9 @@ boolean assign(ArrayList<Integer> vars,
 \lstinputlisting[language=java,firstline=27,firstnumber=1,lastline=66]{LongestSubstring.java}
 \subsection{LongestIncreasingSubsequence}
 \lstinputlisting[language=c++]{longestIncreasingSubsequence.cpp}
+%\subsection{Edit-Distance}
+%\lstinputlisting[language=java]{algorithms/edit.java}
+%\hash{----------------------}
 \subsection{Permutation \& Sequenzen}
 \lstinputlisting[language=java]{PermsAndSequ.java}
 \subsection{Knuth-Morris Pratt}
