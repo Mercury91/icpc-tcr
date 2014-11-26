@@ -551,7 +551,28 @@ boolean assign(ArrayList<Integer> vars,
 \subsection{Knuth-Morris Pratt}
 Finds the first occurrence of the pattern in the text.
 \lstinputlisting[language=java]{KMP.java}\hash{b5b9ca67a1df2c7c2913615bf1ed8a5b}
+\subsection{\textsc{proposal}-Algorithmus (Stable Matching)}
+\textbf{Laufzeit:} $\Theta(n\log n),\mathcal{O}(n^2)$\\
+\textbf{Input:} Menge $J=\{j_1,j_2,\dots,j_n\}, M=\{m_1,m_2,\dots,m_n\},$ Ordnung $O(x)$ auf $J$ bzw. $M$ je $m\in M$ bzw. $j\in J$: \\$O(m_i): j_{i_1}>j_{i_2}>\dots > j_{i_n}$\\
+\textbf{Output:} Stabiles Matching kein Paar $(j_1,j_2)$ oder $(m_1,m_2)$ vorhanden, sodass Partnertausch für das Paar die Präferenz verbessern würde. Ex. im $K_{n,n}$ immer.
+\begin{flushleft}
+\ttfamily 
+1. Solange $\exists j\in J: j $ ist ungepaart. \\
+2.~~~Wähle zufällig $j\in J$ ohne Partner.\\
+3.~~~Für jedes $m\in M$ bzgl. $O(j)$ absteigend,\\
+~~~~~das noch nicht vorgeschlagen wurde. \\
+4.~~~~~Lass $j\;m$ fragen, ob sie einwilligt\\
+5.~~~~~Falls $m$ hat keinen Partner\\
+6.~~~~~~~~verheirate $(j,m)$\\
+7.~~~~~Sonst\\
+8.~~~~~~~~Falls $j$ beliebter ist als Partner $j_m$\\
+~~~~~~~~~~von $m$ bzgl. $O(m)$ (bessere Wahl):\\
+9.~~~~~~~~~~~verheirate $(j,m)$\\
+10.~~~~~~~~~~gib $j_m$ frei\\ 
+\end{flushleft}
+
 \end{multicols}
+
 \section{Formatierung \& Sonstiges}
 \subsection{Ausgabeformatierung mit JAVA - \texttt{DecimalFormat}}
 \begin{tabular}{cl}
